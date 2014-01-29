@@ -74,4 +74,5 @@ If you want to force a refresh of the cached results, pass in the options ```{ f
     search.fetch('customsearch_upinhere', { forceRefresh: true }, function (err, results) {...
     
 ## TODO
-I haven't tried (or needed to) pass any arguments into the generic saved search restlet. I'd like to be able to do this, as I believe some searches will at least need to be able to take a date range.
+* I haven't tried (or needed to) pass any arguments into the generic saved search restlet. I'd like to be able to do this, as I believe some searches will at least need to be able to take a date range.
+* Add optional EXPIRE times to the redis keys 
