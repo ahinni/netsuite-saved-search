@@ -21,7 +21,10 @@ Once this restlet is deployed, make a note of the ```External URL``` in the depl
     https://rest.netsuite.com/app/site/hosting/restlet.nl?script=90210&deploy=1
     
 ## Settings
+
 Create a ```settings.js``` somewhere with your netsuite credentials and restlet url
+
+### Required netsuite settings
 
     module.exports = {
       netsuite: {
@@ -30,6 +33,20 @@ Create a ```settings.js``` somewhere with your netsuite credentials and restlet 
         password: "p4ssw0rd",
         role: "3",
         restlet: "https://rest.netsuite.com/app/site/hosting/restlet.nl?script=90210&deploy=1"
+      }
+    };
+   
+### Redis Options 
+If you don't want to use the standard redisClient settings, you can add a ```redis``` option to the options:
+
+    module.exports = {
+      netsuite: {
+        ...
+      },
+      redis: {
+         host: 'a.b.c.d',
+         port: 90210,
+         cachePrefix: "blah:"
       }
     };
     
