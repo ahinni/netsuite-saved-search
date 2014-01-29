@@ -45,3 +45,8 @@ Check out some of the examples in the examples directory.
       console.log(results);
     });
     
+    
+If you want to force a refresh of the cached results, pass in the options ```{ forceRefresh: true}```
+
+    search.fetch('customsearch_upinhere, { forceRefresh: true }, function (err, results) {...
+    
