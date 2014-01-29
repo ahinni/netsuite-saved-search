@@ -1,0 +1,45 @@
+{
+  "name": "netsuite-saved-search",
+  "version": "0.1.0",
+  "description": "Wrap making restlet call to execute a saved search in netsuite, with optional caching.",
+  "homepage": "http://github.com/ahinni/netsuite-saved-search",
+  "contributors": [
+    "Aaron Hinni @aaronhinni"
+  ],
+  "keywords": [
+    "netsuite",
+    "restlet",
+    "saved search"
+  ],
+  "main": "./lib/index",
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahinni/netsuite-saved-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahinni/netsuite-saved-search/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "devDependencies": {
+    "underscore": "~1.5.2",
+    "underscore.string": "~2.3.3",
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.12",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "chai": "~1.8.1",
+    "mocha": "~1.17.1",
+    "grunt-exec": "~0.4.3"
+  },
+  "dependencies": {
+    "redis": "~0.10.0",
+    "restler": "~3.1.0"
+  }
+}

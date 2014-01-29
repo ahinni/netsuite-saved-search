@@ -12,4 +12,5 @@ logs
 results
 
 npm-debug.log
+examples/settings.js
 node_modules
