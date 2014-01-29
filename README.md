@@ -20,3 +20,28 @@ Once this restlet is deployed, make a note of the ```External URL``` in the depl
 
     https://rest.netsuite.com/app/site/hosting/restlet.nl?script=90210&deploy=1
     
+## Settings
+Create a ```settings.js``` somewhere with your netsuite credentials and restlet url
+
+    module.exports = {
+      netsuite: {
+        account: "1234567",
+        email: "mynetsuiteaccount@here.tld",
+        password: "p4ssw0rd",
+        role: "3",
+        restlet: "https://rest.netsuite.com/app/site/hosting/restlet.nl?script=90210&deploy=1"
+      }
+    };
+    
+## Usage
+Check out some of the examples in the examples directory.
+
+    var settings = require('./config/settings');
+    var search = require('netsuite-saved-search')(settings);
+    
+    // This will try the cached version first, if not there will run and then cache
+    search.fetch('customsearch_upinhere, function (err, results) {
+      if (err) onFailure(err);
+      console.log(results);
+    });
+    
