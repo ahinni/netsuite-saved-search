@@ -1,4 +1,3 @@
-//COPY
 function translateRaw( raw ) {
   var result = {
     id: raw.id,
@@ -10,6 +9,7 @@ function translateRaw( raw ) {
 }
 
 function translateRawColumns( raw ) {
+  if ( !raw.rawColumns ) return undefined;
   var columns = {};
   raw.rawColumns.forEach( function (col, index) {
     var key = col.name;
@@ -27,6 +27,7 @@ function translateRawValue(column, val) {
   return val.value;
 }
 
+//COPY
 function executeSavedSearch(options) {
   if ( !options.searchId ) {
     return { error: 'Must provide the searchId of the saved search', options: options };
@@ -40,16 +41,16 @@ function executeSavedSearch(options) {
 
   var index = 0;
   do {
-    var subset = resultset.getResult(index, index+1000);
-    subset.forEach( function (raw) {
-      results.push( translateRaw(raw) );
+    var subset = resultset.getResults(index, index+1000);
+    if ( !subset ) break;
+    subset.forEach( function (row) {
+      results.push(row);
       index++;
     });
   } while (subset.length === SLICE_LIMIT);
 
   return results;
 }
-
 //END_COPY
 
 module.exports = {
