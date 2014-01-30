@@ -28,6 +28,22 @@ function translateRawValue(column, val) {
 }
 
 //COPY
+function construct(constructor, args) {
+  function F() {
+    return constructor.apply(this, args);
+  }
+  F.prototype = constructor.prototype;
+  return new F();
+}
+
+function applyFilters(search, options) {
+  var filters = options.filters ? JSON.parse(options.filters) : [];
+  filters.forEach( function(filterData) {
+    var filter = construct(nlobjSearchFilter, filterData);
+    search.addFilter(filter);
+  });
+}
+
 function executeSavedSearch(options) {
   if ( !options.searchId ) {
     return { error: 'Must provide the searchId of the saved search', options: options };
@@ -35,10 +51,11 @@ function executeSavedSearch(options) {
 
   var SLICE_LIMIT = 1000;
   var search = nlapiLoadSearch(null, options.searchId);
+  applyFilters(search, options);
+
   var resultset = search.runSearch();
 
   var results = [];
-
   var index = 0;
   do {
     var subset = resultset.getResults(index, index+1000);

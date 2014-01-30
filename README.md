@@ -98,10 +98,20 @@ search.fetch('customsearch_upinhere', function (err, results) {
 });
 ```
 
+### Cache Refresh
 If you want to force a refresh of the cached results, pass in the options ```{ forceRefresh: true}```
 
     search.fetch('customsearch_upinhere', { forceRefresh: true }, function (err, results) {...
+
+### Filters
+An array of filters can be passed into the netsuite saved search:
+
+```javascript
+var filters = [
+  ['modified', null, 'onOrAfter', '1/30/2014 12:00 am']
+];
+search.fetch(searchId, { forceRefresh: true, filters: filters },
+```
     
 ## TODO
-* I haven't tried (or needed to) pass any arguments into the generic saved search restlet. I'd like to be able to do this, as I believe some searches will at least need to be able to take a date range.
 * Add optional EXPIRE times to the redis keys 
