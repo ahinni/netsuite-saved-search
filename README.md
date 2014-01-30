@@ -10,12 +10,41 @@ Node module wrapping making restlet call to execute a saved search in netsuite.
 Set up a restlet in netsuite that can generically invoke a saved search.
 
 ```javascript
-    function executeSavedSearch(options) {
-      if ( !options.searchId ) {
-        return { error: 'Must provide the searchId of the saved search', options: options };
-      }
-      return nlapiSearchRecord(null, options.searchId, null, null);
-    }
+function executeSavedSearch(options) {
+  if ( !options.searchId ) {
+    return { error: 'Must provide the searchId of the saved search', options: options };
+  }
+  return nlapiSearchRecord(null, options.searchId, null, null);
+}
+```
+
+NOTE: the above can run into the 1000 record limit with netsuite. An
+alternative script to use is something like this:
+
+```javascript
+function executeSavedSearch(options) {
+  if ( !options.searchId ) {
+    return { error: 'Must provide the searchId of the saved search', options: options };
+  }
+
+  var SLICE_LIMIT = 1000;
+  var search = nlapiLoadSearch(null, options.searchId);
+  var resultset = search.runSearch();
+
+  var results = [];
+
+  var index = 0;
+  do {
+    var subset = resultset.getResults(index, index+1000);
+    if ( !subset ) break;
+    subset.forEach( function (row) {
+      results.push(row);
+      index++;
+    });
+  } while (subset.length === SLICE_LIMIT);
+
+  return results;
+}
 ```
 
 Once this restlet is deployed, make a note of the ```External URL``` in the deployment. Example:
@@ -74,6 +103,5 @@ If you want to force a refresh of the cached results, pass in the options ```{ f
     search.fetch('customsearch_upinhere', { forceRefresh: true }, function (err, results) {...
     
 ## TODO
-* Sigh. Deal w/ 1000 row limit when doing save search.
 * I haven't tried (or needed to) pass any arguments into the generic saved search restlet. I'd like to be able to do this, as I believe some searches will at least need to be able to take a date range.
 * Add optional EXPIRE times to the redis keys 
