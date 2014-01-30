@@ -1,4 +1,4 @@
-// Begin Copy Here for netsuite restlet script
+//COPY
 function translateRaw( raw ) {
   var result = {
     id: raw.id,
@@ -50,7 +50,7 @@ function executeSavedSearch(options) {
   return results;
 }
 
-// End Copy Here for netsuite restlet script
+//END_COPY
 
 module.exports = {
   translateRaw: translateRaw,

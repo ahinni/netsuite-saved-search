@@ -10,6 +10,9 @@ module.exports = function(grunt) {
       mocha_test: {
         // Workaround for grunt-mocha-test not giving good errors on failure
         cmd: 'find test -name "*_test.js" | xargs node_modules/.bin/mocha --colors'
+      },
+      copy_for_netsuite: {
+        cmd: "sed -n -e '/COPY/,/END_COPY/ p' examples/restlet_script.js | grep -v COPY | pbcopy"
       }
     },
     jshint: {
@@ -45,4 +48,5 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['test', 'jshint']);
   grunt.registerTask('test', 'exec:mocha_test');
+  grunt.registerTask('copy', 'exec:copy_for_netsuite');
 };
