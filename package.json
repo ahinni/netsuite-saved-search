@@ -1,6 +1,6 @@
 {
   "name": "netsuite-saved-search",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Wrap making restlet call to execute a saved search in netsuite, with optional caching.",
   "homepage": "http://github.com/ahinni/netsuite-saved-search",
   "contributors": [
