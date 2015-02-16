@@ -13,6 +13,10 @@ module.exports = function(grunt) {
       },
       copy_for_netsuite: {
         cmd: "sed -n -e '/COPY/,/END_COPY/ p' examples/restlet_script.js | grep -v COPY | pbcopy"
+      },
+
+      generic_search_restlet: {
+        cmd: "sed -n -e '/COPY/,/END_COPY/ p' examples/generic_search_restlet.js | grep -v COPY | pbcopy"
       }
     },
     jshint: {
